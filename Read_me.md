@@ -54,17 +54,7 @@ Important Note: If you give passphrase during generation, during everytime you l
 '''I skipped this passphrase requirement'''
 
 The key's randomart image is:
-+---[RSA 4096]----+
-|     ..OXO=+..E. |
-|  . . B+o*B+     |
-|   + + .o+B o    |
-|    + o oO..     |
-|     + +S..      |
-|      + +        |
-|     + + .       |
-|    . = .        |
-|     .           |
-+----[SHA256]-----+
+
 '''
 
 # List Files
