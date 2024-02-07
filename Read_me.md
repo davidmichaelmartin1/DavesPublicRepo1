@@ -37,24 +37,32 @@ description: Create Azure Linux VM using Terraform
 # Create Folder
 mkdir terraform-manifests/
 cd terraform-manifests/
-mkdir ssh-keys # store all of our keys in a separate folder.
+mkdir ssh-keys
 
 # Create SSH Key
-# We do this first to create a private connection to our system.. # 
-
 cd ssh-keys
 ssh-keygen \
     -m PEM \
     -t rsa \
     -b 4096 \
-    -C "azureuser@myserver" \ # this is server
-    -f terraform-azure.pem # this is form... 
+    -C "azureuser@myserver" \
+    -f terraform-azure.pem 
 Important Note: If you give passphrase during generation, during everytime you login to VM, you also need to provide passphrase. 
 
 '''I skipped this passphrase requirement'''
 
 The key's randomart image is:
-
++---[RSA 4096]----+
+|     ..OXO=+..E. |
+|  . . B+o*B+     |
+|   + + .o+B o    |
+|    + o oO..     |
+|     + +S..      |
+|      + +        |
+|     + + .       |
+|    . = .        |
+|     .           |
++----[SHA256]-----+
 '''
 
 # List Files
@@ -66,9 +74,13 @@ ls -lrt ssh-keys/
 -rw-------  1 davidmartin  staff  3247 Jan 28 08:42 -f terraform-azure.pem
 -rw-r--r--  1 davidmartin  staff   744 Jan 28 08:42 -f terraform-azure.pem.pub '''
 
+# .pub is a public file
+# .pem is a private file
+
+
 
 # Files Generated after above command 
-Public Key: terraform-azure.pem.pub -> Rename as terraform-azure.pub # this reduces confusion for our server
+Public Key: terraform-azure.pem.pub -> Rename as terraform-azure.pub
 mv terraform-azure.pem.pub terraform-azure.pub
 didnt work "no such file or directory"
 cd ssh-keys
@@ -80,11 +92,14 @@ didnt work "terraform-azure.pub is not a directory"
 it worked.
 
 
-Private Key: terraform-azure.pem # the computer knows not to open this because it has passwords in it. 
+Private Key: terraform-azure.pem
 
 # Permissions for Pem file
-chmod 400 terraform-azure.pem  # this command changes a -rw-r--r-- to a -rw------- (ie those in gorup and others cannot read or write to this file)
+chmod 400 terraform-azure.pem
 ```
+# chmod changes the permissions on a file... readable, executable, writable, unaccessable, etc
+
+
 ''' appears to have worked. no output'''
 
 ## Step-01: c7-01-web-linuxvm-input-variables.tf
@@ -303,7 +318,8 @@ output "web_linuxvm_virtual_machine_id" {
 
 ## Step-07: terraform.tfvars
 ''' touch terraform.tfvars '''
-#''' this entire page errored out due to "unexpected attribute" '''
+#''' this entire page errored out due to "unexpected attribute" 
+solved by creating a new file variables.tf'''
 
 ```t
 business_divsion = "hr"
